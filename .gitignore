@@ -10,3 +10,8 @@ Thumbs.db
 .vercel
 .claude/
 .impeccable/config.local.json
+
+# Personal source files: kept on this machine only
+*.jpeg
+*.jpg
+public/*.pdf

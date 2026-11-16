@@ -26,7 +26,6 @@ export const contact = {
     label: "Harish Ram S",
     href: "https://www.linkedin.com/in/harish-ram-s-3b304a340",
   },
-  resume: "/Harish-Ram-S-Resume.pdf",
   // Set to a string such as "+91 …" to show a phone row in the contact overlay.
   phone: null as string | null,
 } as const;

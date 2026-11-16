@@ -44,8 +44,8 @@ Single-page site, deployed on Vercel from `github.com/harish-ram247/My-Portfolio
 
 ## Evidence on Hand
 
-- Resume PDF (`public/Harish-Ram-S-Resume.pdf`).
-- Portrait (`Professional photo  Harish Ram S.jpeg`, cutout in `public/portrait/`).
+- Resume PDF: source of truth for content, kept outside the repository and not offered for download.
+- Portrait: original photo kept outside the repository; the cutout is in `public/portrait/`.
 - Public repos: TRACE, Expense_Tracker (Pocketwise), Urban-farm.
 - Absent, never to be fabricated: screenshots, demos or repos for CyberShield and Industrial IoT; live links for any project.
 

@@ -76,5 +76,4 @@ Skip link, one `h1`, landmarks per section, visible yellow focus ring (ink on pa
 ## Asset provenance
 
 - `public/portrait/harish-cutout*.webp`: cut out from Harish's own studio photo by `scripts/make-cutout.mjs` (border flood fill of the white backdrop, feathered edge). Not generated, face unaltered.
-- `public/Harish-Ram-S-Resume.pdf`: Harish's resume, copied unchanged.
 - All diagrams and the hand illustration are hand-authored SVG in the repo.

@@ -1,6 +1,7 @@
 // Builds a transparent cutout of the studio portrait.
 // The white backdrop is removed by flood-filling from the image border, so the
 // white shirt (enclosed by the blazer) is kept. Edges are feathered slightly.
+// The source photo is not in the repository; pass its path.
 // Usage: node scripts/make-cutout.mjs "<source image>"
 import sharp from "sharp";
 import { mkdir } from "node:fs/promises";

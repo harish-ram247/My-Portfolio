@@ -75,7 +75,7 @@ These supersede items 1–3 and the defaults in section 4.
 - **Primary projects:** TRACE, CyberShield, Industrial IoT Predictive Maintenance.
 - **Secondary projects:** Kubernetes monitoring with Prometheus and Grafana, Urban Farm Management System, Pocketwise.
 - **Excluded:** AI Fitness & Nutrition Assistant, and any other project.
-- **Working defaults until told otherwise:** resume-only facts (old-site extras in item 4 left out), phone number not shown on the page, resume PDF offered for download, design system built with Impeccable and ui-styling because UI UX Pro Max is not installed.
+- **Working defaults until told otherwise:** resume-only facts (old-site extras in item 4 left out), phone number not shown on the page, resume PDF and original photo kept out of the repository (decided 16 Nov 2026), design system built with Impeccable and ui-styling because UI UX Pro Max is not installed.
 
 ## 4. Needs your answer
 

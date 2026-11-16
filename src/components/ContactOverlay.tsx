@@ -75,7 +75,6 @@ function Panel({ origin, onClose }: Omit<Props, "open">) {
     ...(contact.phone
       ? [{ label: "Phone", value: contact.phone, href: `tel:${contact.phone.replace(/\s/g, "")}`, external: false }]
       : []),
-    { label: "Resume", value: "Download the PDF", href: contact.resume, external: true },
   ];
 
   return (

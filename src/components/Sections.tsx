@@ -290,11 +290,6 @@ export function Footer() {
               LinkedIn <Arrow size={10} />
             </a>
           </li>
-          <li>
-            <a className="link" href={contact.resume} target="_blank" rel="noreferrer">
-              Resume (PDF) <Arrow size={10} />
-            </a>
-          </li>
         </ul>
         <p className="dimmer" style={{ margin: 0 }}>
           © 2026 {person.name} · {person.location}
