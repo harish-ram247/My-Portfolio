@@ -52,7 +52,7 @@ export function Subject() {
         <h2 id="subject-h" className="display">
           The <span className="serif">subject.</span>
         </h2>
-        <p className="mono dimmer">Who he is, in his own resume&rsquo;s words</p>
+        <p className="mono dimmer">Who he is, in his own words</p>
       </header>
 
       <div className="subject">

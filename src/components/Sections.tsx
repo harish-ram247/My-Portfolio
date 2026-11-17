@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { MOTION_OK, gsap, useGSAP } from "@/lib/gsap";
 import { certifications, contact, experience, person, record, skills } from "@/content/site";
 import { Arrow } from "./Arrow";
+import { PrizeSlot } from "./PrizeSlot";
 
 const headingWipe = (trigger: string, target: string) =>
   gsap.from(target, {
@@ -91,6 +92,15 @@ export function Evidence() {
           ease: "expo.out",
           scrollTrigger: { trigger: ".awards", start: "top 85%" },
         });
+        // The prize slides in from the card's right edge after the card settles.
+        gsap.from(".award__prize", {
+          xPercent: 70,
+          opacity: 0,
+          duration: 1.2,
+          delay: 0.55,
+          ease: "expo.out",
+          scrollTrigger: { trigger: ".awards", start: "top 85%" },
+        });
         gsap.from(".certs li", {
           opacity: 0,
           y: 30,
@@ -126,6 +136,12 @@ export function Evidence() {
                 {r.figure}
                 <span className="award__unit mono mono--lg">{r.unit}</span>
               </p>
+              {"prize" in r && (
+                <p className="award__prize">
+                  <span className="award__prize-label mono">Prize won</span>
+                  <PrizeSlot amount={r.prize} />
+                </p>
+              )}
               <div>
                 <h4>{r.title}</h4>
                 <p>{r.detail}</p>

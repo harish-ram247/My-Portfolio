@@ -147,6 +147,8 @@ export function CaseFiles() {
             clipPath: wipes[i % 3],
             duration: 1.3,
             ease: "expo.inOut",
+            // Drop the clip once revealed, or it would cut off the hover glow.
+            clearProps: "clipPath",
             scrollTrigger: { trigger: el, start: "top 78%" },
           });
 

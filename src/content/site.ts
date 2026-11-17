@@ -26,6 +26,7 @@ export const contact = {
     label: "Harish Ram S",
     href: "https://www.linkedin.com/in/harish-ram-s-3b304a340",
   },
+  resume: { href: "/Harish-Ram-S-Resume.pdf", file: "Harish-Ram-S-Resume.pdf" },
   // Set to a string such as "+91 …" to show a phone row in the contact overlay.
   phone: null as string | null,
 } as const;
@@ -193,6 +194,8 @@ export const record = [
     unit: "place",
     title: "Hackwise National Hackathon",
     detail: "IEEE TEMS, IIM Indore. January 2026.",
+    // Prize won, confirmed by Harish (17 Nov 2026).
+    prize: "₹10,000",
   },
   {
     figure: "600+",

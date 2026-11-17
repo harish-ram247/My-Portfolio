@@ -37,7 +37,7 @@ Fonts are bundled through `@fontsource-variable/*`; nothing is fetched from a fo
 
 ## Themes
 
-Sections set `.theme-paper` or `.theme-yellow`, which swap `--fg`, `--fg-2`, `--fg-3`, `--line`, `--line-strong` and `--hl`. Components read those variables, so the same markup works on any ground. The nav is a solid ink bar on every ground.
+Sections set `.theme-paper` or `.theme-yellow`, which swap `--fg`, `--fg-2`, `--fg-3`, `--line`, `--line-strong` and `--hl`. Components read those variables, so the same markup works on any ground. The nav is a floating liquid glass pill: a dark-tinted blur of the page behind, a rim light along its edge and a sheen that follows the pointer, so it reads on every ground.
 
 ## Layout
 
@@ -75,5 +75,5 @@ Skip link, one `h1`, landmarks per section, visible yellow focus ring (ink on pa
 
 ## Asset provenance
 
-- `public/portrait/harish-cutout*.webp`: cut out from Harish's own studio photo by `scripts/make-cutout.mjs` (border flood fill of the white backdrop, feathered edge). Not generated, face unaltered.
+- `public/portrait/harish-cutout*.webp`: Harish's 2026 portrait (supplied by him), cut from its purple backdrop with the rembg isnet model, backdrop haze and purple edge spill neutralised, then trimmed and exported by `scripts/export-portrait.mjs`. Face and features unaltered. The source photo and full-size cutout stay in the ignored `source-photos/` folder.
 - All diagrams and the hand illustration are hand-authored SVG in the repo.

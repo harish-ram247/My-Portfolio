@@ -36,6 +36,7 @@ function Scene({ lit }: { lit: boolean }) {
         </p>
       )}
 
+      {lit && <div className="hero__halo" data-h="portrait" aria-hidden="true" />}
       <div className="hero__portrait" data-h="portrait" data-intro>
         <picture>
           <source
@@ -46,8 +47,8 @@ function Scene({ lit }: { lit: boolean }) {
           <img
             src="/portrait/harish-cutout.webp"
             width={1100}
-            height={1418}
-            alt={lit ? "" : `Portrait of ${person.name}`}
+            height={1105}
+            alt={lit ? "" : `Portrait of ${person.name} in a dark blazer and white shirt`}
             fetchPriority="high"
             decoding="async"
             draggable={false}

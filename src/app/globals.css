@@ -34,7 +34,10 @@
   --line-strong: var(--rule-strong);
   --hl: var(--color-yellow);
   --gutter: clamp(1.25rem, 4vw, 4rem);
-  --nav-h: 4rem;
+  /* Space reserved for the floating nav: bar height plus its gap from the top. */
+  --nav-h: 4.6rem;
+  --nav-bar: 3.6rem;
+  --nav-gap: 0.6rem;
   color-scheme: dark;
 }
 
@@ -1546,6 +1549,7 @@ html.anim [data-intro] {
   overflow: hidden;
 }
 .stack-card[data-tone="ink"] {
+  --card-glow: #cfff04;
   --card-bg: #181512;
   --card-fg: var(--color-ivory);
   --card-2: #bdb5a4;
@@ -1557,6 +1561,7 @@ html.anim [data-intro] {
   --card-btn-fg: #0b0a09;
 }
 .stack-card[data-tone="paper"] {
+  --card-glow: #cfff04;
   --card-bg: var(--color-paper);
   --card-fg: #0c0b0a;
   --card-2: #3d3a34;
@@ -1568,6 +1573,7 @@ html.anim [data-intro] {
   --card-btn-fg: var(--color-paper);
 }
 .stack-card[data-tone="yellow"] {
+  --card-glow: #e8ff3a;
   --card-bg: var(--color-yellow);
   --card-fg: #0c0b0a;
   --card-2: #2b2710;
@@ -2181,8 +2187,186 @@ html.anim .award__face {
   color: var(--color-ivory);
   transition: color 0.35s;
 }
+.award--1 .award__face {
+  grid-template-rows: auto auto 1fr auto;
+}
 .award--1 .award__fig {
-  font-size: clamp(5rem, 15vw, 15rem);
+  font-size: clamp(4.2rem, 9.5vw, 9.5rem);
+}
+
+/* Prize: the brightest thing in the section, with a slow glow pulse. */
+.award__prize {
+  align-self: center;
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 1.1rem 0 0.2rem;
+  border-top: 1px dashed rgb(246 210 28 / 0.35);
+}
+.award__prize-label {
+  color: var(--color-yellow);
+  letter-spacing: 0.2em;
+}
+/* ---------- prize slot machine ---------- */
+
+.slot {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.6rem, 1.4vw, 1.1rem);
+  position: relative;
+  max-width: 100%;
+}
+.slot__machine {
+  position: relative;
+  min-width: 0;
+}
+.slot__reels {
+  --cell: 1.04em;
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  padding: 0.06em 0.16em;
+  border-radius: 0.14em;
+  border: 1px solid rgb(246 210 28 / 0.45);
+  background: linear-gradient(#060505, #15120c 50%, #060505);
+  box-shadow: inset 0 0 0.18em rgb(0 0 0 / 0.9), 0 0 26px -6px rgb(246 210 28 / 0.45);
+  font-size: clamp(3.2rem, 8.6vw, 8.8rem);
+  font-stretch: 80%;
+  line-height: var(--cell);
+  letter-spacing: -0.01em;
+  color: #fff3a6;
+  text-shadow:
+    0 0 6px rgb(255 236 120 / 0.9),
+    0 0 22px rgb(246 210 28 / 0.75),
+    0 0 60px rgb(246 210 28 / 0.45);
+}
+/* Drum shading: digits darken towards the top and bottom of each window. */
+.slot__reels::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(rgb(0 0 0 / 0.75), transparent 28%, transparent 72%, rgb(0 0 0 / 0.75));
+}
+html.anim .slot__reels[data-spinning="false"] {
+  animation: prize-glow 2.8s ease-in-out infinite;
+}
+.slot__reels[data-spinning="true"] .slot__cell {
+  filter: blur(0.025em);
+}
+.slot__reel,
+.slot__static {
+  display: inline-block;
+  height: var(--cell);
+}
+.slot__reel {
+  position: relative;
+  /* clip vertically only, so the glow can spill sideways */
+  clip-path: inset(0 -0.6em);
+}
+.slot__reel + .slot__reel,
+.slot__static + .slot__reel,
+.slot__reel + .slot__static {
+  margin-left: 0.02em;
+}
+.slot__strip {
+  display: block;
+  transform: translateY(calc(var(--cell) * var(--last) * -1));
+}
+.slot__cell {
+  display: block;
+  height: var(--cell);
+  text-align: center;
+}
+.slot__sparks {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+}
+.slot__spark {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffbe0 0, var(--color-yellow) 45%, rgb(246 210 28 / 0) 72%);
+  opacity: 0;
+}
+.slot__spark:nth-child(3n) {
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 35% 35%, #fff6c2 0, var(--color-yellow) 40%, #b88a00 75%);
+  box-shadow: 0 0 10px rgb(246 210 28 / 0.8);
+}
+.slot__lever {
+  position: relative;
+  flex: none;
+  width: 2rem;
+  height: 4.6rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.slot__stick {
+  position: absolute;
+  left: 50%;
+  bottom: 0.4rem;
+  width: 4px;
+  height: 3.6rem;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #8f887a, #efe8d8 45%, #8f887a);
+  transform-origin: 50% 100%;
+}
+.slot__lever::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 1.2rem;
+  height: 0.7rem;
+  margin-left: -0.6rem;
+  border-radius: 0.25rem 0.25rem 0.1rem 0.1rem;
+  background: #2a2620;
+  border: 1px solid rgb(239 232 216 / 0.25);
+}
+.slot__knob {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-left: -0.575rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff9a86 0, var(--color-red) 45%, #8f1d0d 100%);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.6);
+  transition: box-shadow 0.3s;
+}
+.slot__lever:hover .slot__knob {
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.6), 0 0 14px rgb(239 74 49 / 0.8);
+}
+html.still .slot__lever {
+  display: none;
+}
+
+@keyframes prize-glow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 6px rgb(255 236 120 / 0.9),
+      0 0 22px rgb(246 210 28 / 0.75),
+      0 0 60px rgb(246 210 28 / 0.45);
+  }
+  50% {
+    text-shadow:
+      0 0 10px rgb(255 244 170 / 1),
+      0 0 34px rgb(246 210 28 / 0.95),
+      0 0 90px rgb(246 210 28 / 0.7);
+  }
 }
 .award__face:hover .award__fig {
   color: var(--glow);
@@ -2218,5 +2402,312 @@ html.anim .award__face {
   }
   .award__face {
     min-height: 14rem;
+  }
+}
+
+/* ---------- neon hover on project titles ---------- */
+/* Each title lights up in its own project colour: the case accent, or the card's glow tone. */
+
+.case__title,
+.stack-card h3 {
+  /* Neon yellow-to-lime only, regardless of the project accent. */
+  --neon: #cfff04;
+  transition:
+    color 0.35s var(--ease-out-expo),
+    text-shadow 0.45s var(--ease-out-expo);
+  cursor: default;
+}
+.stack-card h3 {
+  --neon: var(--card-glow);
+}
+.case__title:hover,
+.stack-card h3:hover {
+  color: color-mix(in srgb, var(--neon) 55%, #fff);
+  text-shadow:
+    0 0 4px color-mix(in srgb, var(--neon) 70%, #fff),
+    0 0 14px var(--neon),
+    0 0 36px var(--neon),
+    0 0 80px color-mix(in srgb, var(--neon) 60%, transparent);
+}
+html.anim .case__title:hover,
+html.anim .stack-card h3:hover {
+  animation: neon-flicker 2.4s linear infinite;
+}
+/* A brief tube-light flicker at the start of each cycle, then steady. */
+@keyframes neon-flicker {
+  0%,
+  6%,
+  10%,
+  100% {
+    opacity: 1;
+  }
+  4%,
+  8% {
+    opacity: 0.72;
+  }
+}
+.case[data-accent="yellow"] .case__title {
+  --neon: #ffe94a;
+}
+.case[data-accent="blue"] .case__title {
+  --neon: #e6ff3d;
+}
+
+/* On light cards the glow would wash pale letters out: the letters go ink and the lime halo carries the neon. */
+.stack-card[data-tone="paper"] h3:hover,
+.stack-card[data-tone="yellow"] h3:hover {
+  color: #0c0b0a;
+  text-shadow:
+    0 0 2px color-mix(in srgb, var(--neon) 80%, #4d6000),
+    0 0 10px var(--neon),
+    0 0 26px var(--neon),
+    0 0 60px color-mix(in srgb, var(--neon) 70%, transparent);
+}
+/* Yellow card: a lime halo vanishes on yellow, so the letters themselves light up, outlined in ink. */
+.stack-card[data-tone="yellow"] h3:hover {
+  color: #dcff2e;
+  -webkit-text-stroke: 3px #0c0b0a;
+  paint-order: stroke fill;
+  text-shadow:
+    0 0 1px #0c0b0a,
+    0 0 14px rgb(207 255 4 / 0.95),
+    0 0 34px rgb(207 255 4 / 0.7);
+}
+/* TRACE, Industrial IoT and the Kubernetes card: same colours, softer glow. */
+.case[data-accent="yellow"] .case__title:hover,
+.case[data-accent="blue"] .case__title:hover,
+.stack-card[data-tone="ink"] h3:hover {
+  color: color-mix(in srgb, var(--neon) 82%, #fff);
+  text-shadow:
+    0 0 3px color-mix(in srgb, var(--neon) 55%, transparent),
+    0 0 12px color-mix(in srgb, var(--neon) 45%, transparent),
+    0 0 30px color-mix(in srgb, var(--neon) 25%, transparent);
+}
+
+/* ---------- resume menu (nav) ---------- */
+
+.resume {
+  position: relative;
+}
+.resume__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 36px;
+  padding: 0 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-yellow);
+  background: transparent;
+  color: var(--color-yellow);
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, box-shadow 0.3s;
+}
+.resume__btn:hover,
+.resume__btn[aria-expanded="true"] {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  box-shadow: 0 0 18px rgb(246 210 28 / 0.35);
+}
+.resume__menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.6rem);
+  z-index: 60;
+  width: 17rem;
+  padding: 0.4rem;
+  border-radius: 14px;
+  background: #15120f;
+  border: 1px solid var(--rule-strong);
+  box-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.8);
+  transform-origin: 100% 0;
+}
+.resume__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0.8rem;
+  border-radius: 10px;
+  color: var(--color-ivory);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+.resume__item svg {
+  flex: none;
+  margin-top: 0.15rem;
+  color: var(--color-yellow);
+}
+.resume__item span {
+  display: grid;
+  gap: 0.2rem;
+}
+.resume__item small {
+  font-weight: 400;
+  font-size: 0.66rem;
+  color: var(--fg-3, #8f887a);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+.resume__item:hover,
+.resume__item:focus-visible {
+  background: rgb(246 210 28 / 0.12);
+  color: var(--color-yellow);
+  outline: none;
+}
+.resume__item:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--color-yellow);
+}
+@media (max-width: 899px) {
+  .resume {
+    display: none;
+  }
+}
+.sheet__foot {
+  display: grid;
+  gap: 1.25rem;
+}
+.sheet__resume {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.sheet .sheet__resume a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-yellow);
+  color: var(--color-yellow);
+  font-size: 0.78rem;
+}
+.sheet .sheet__resume a:last-child {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+/* ---------- liquid glass nav ---------- */
+/* A floating translucent bar: the page blurs and brightens behind it, a curved
+   rim catches light along the top edge, and a soft sheen follows the pointer. */
+
+.nav {
+  --mx: 30%;
+  top: var(--nav-gap);
+  left: var(--gutter);
+  right: var(--gutter);
+  height: var(--nav-bar);
+  padding-inline: clamp(1rem, 2vw, 1.6rem) clamp(0.5rem, 1vw, 0.75rem);
+  border: 0;
+  border-radius: 999px;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.02) 46%, rgb(255 255 255 / 0.04)),
+    rgb(16 14 12 / 0.66);
+  -webkit-backdrop-filter: blur(18px) saturate(170%) brightness(0.8);
+  backdrop-filter: blur(18px) saturate(170%) brightness(0.8);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    inset 0 -1px 0 rgb(255 255 255 / 0.06),
+    inset 0 0 0 1px rgb(255 255 255 / 0.08),
+    inset 0 -10px 18px -12px rgb(255 255 255 / 0.12),
+    0 10px 30px -12px rgb(0 0 0 / 0.65),
+    0 2px 6px rgb(0 0 0 / 0.25);
+}
+/* Rim light: a thin gradient border, brightest along the top and the far edges. */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    120deg,
+    rgb(255 255 255 / 0.5),
+    rgb(255 255 255 / 0.08) 30%,
+    rgb(255 255 255 / 0.04) 60%,
+    rgb(255 255 255 / 0.35)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+/* Specular sheen that drifts with the pointer. */
+.nav::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(120px 60px at var(--mx) 0%, rgb(255 255 255 / 0.22), transparent 70%),
+    radial-gradient(260px 80px at var(--mx) 120%, rgb(246 210 28 / 0.08), transparent 70%);
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.nav__mark {
+  bottom: 6px;
+}
+@media (max-width: 899px) {
+  .nav {
+    left: 0.6rem;
+    right: 0.6rem;
+  }
+}
+/* Without backdrop blur (or when the OS asks for less transparency) the bar goes solid. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav {
+    background: rgb(16 14 12 / 0.94);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .nav {
+    background: rgb(16 14 12 / 0.96);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+/* The figure caption collides with the location caption on mid-size screens. */
+@media (max-width: 1199px) {
+  .hero__cap--fig {
+    display: none;
+  }
+}
+
+/* ---------- portrait (2026 photo: near-square cutout) ---------- */
+
+.hero__portrait {
+  aspect-ratio: 1100 / 1105;
+  height: min(80%, 38vw + 12rem);
+  right: clamp(-5rem, -3vw, -1rem);
+}
+.hero-scene--lit .hero__portrait img {
+  /* A touch warmer and crisper under the light, with a soft contact shadow. */
+  filter: contrast(1.05) saturate(1.06) brightness(1.02);
+}
+/* Warm halo behind the head: only in the lit layer, so the torch reveals it. */
+.hero__halo {
+  position: absolute;
+  z-index: 1;
+  right: clamp(4rem, 13vw, 16rem);
+  top: 16%;
+  width: clamp(16rem, 30vw, 30rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgb(255 247 200 / 0.55) 0, rgb(246 210 28 / 0.35) 32%, rgb(246 210 28 / 0) 68%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+@media (max-width: 899px) {
+  .hero__portrait {
+    right: -14vw;
+    height: min(54%, 96vw);
+  }
+  .hero__halo {
+    right: 4vw;
+    top: 22%;
+    width: 70vw;
   }
 }

@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { nav, person } from "@/content/site";
+import { contact, nav, person } from "@/content/site";
 import { useLights } from "./LightsProvider";
+import { ResumeMenu } from "./ResumeMenu";
 
 const spring = { type: "spring", stiffness: 520, damping: 34 } as const;
 
@@ -43,7 +44,14 @@ export function Nav() {
 
   return (
     <>
-      <header className="nav">
+      <header
+        className="nav"
+        // Sheen follows the pointer via a CSS variable; no React re-render.
+        onPointerMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          e.currentTarget.style.setProperty("--mx", `${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
+        }}
+      >
         <a href="#top" className="nav__brand" aria-label={`${person.name}, back to top`}>
           H<i aria-hidden="true" />R
         </a>
@@ -77,6 +85,7 @@ export function Nav() {
         </nav>
 
         <div className="nav__right">
+          <ResumeMenu />
           <button
             type="button"
             className="lights mono"
@@ -133,9 +142,19 @@ export function Nav() {
                 </motion.li>
               ))}
             </ul>
-            <p className="mono dimmer" style={{ margin: 0 }}>
-              {person.name} · {person.location}
-            </p>
+            <div className="sheet__foot">
+              <div className="sheet__resume mono">
+                <a href={contact.resume.href} target="_blank" rel="noreferrer">
+                  View resume
+                </a>
+                <a href={contact.resume.href} download={contact.resume.file}>
+                  Download PDF
+                </a>
+              </div>
+              <p className="mono dimmer" style={{ margin: 0 }}>
+                {person.name} · {person.location}
+              </p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
