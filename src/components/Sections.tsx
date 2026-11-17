@@ -61,6 +61,9 @@ export function Toolkit() {
   );
 }
 
+// Category label for each entry in `record`, in the same order.
+const AWARD_KIND = ["National hackathon", "Competitive programming", "Competitive programming"];
+
 /** Results and certifications, on a yellow field. */
 export function Evidence() {
   const root = useRef<HTMLElement>(null);
@@ -70,15 +73,23 @@ export function Evidence() {
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
         headingWipe(".chapter", ".chapter h2");
-        // Figures slide in from the left, one row at a time.
-        gsap.utils.toArray<HTMLElement>(".tally").forEach((row) => {
-          gsap.from(row.querySelector(".tally__fig"), {
-            xPercent: -40,
-            opacity: 0,
-            duration: 1.1,
-            ease: "expo.out",
-            scrollTrigger: { trigger: row, start: "top 88%" },
-          });
+        // Cards rise into place, then the CSS float takes over on their inner face.
+        gsap.from(".award", {
+          opacity: 0,
+          y: 60,
+          duration: 1.1,
+          stagger: 0.12,
+          ease: "expo.out",
+          scrollTrigger: { trigger: ".awards", start: "top 85%" },
+        });
+        gsap.from(".award__fig", {
+          yPercent: 60,
+          clipPath: "inset(0 0 100% 0)",
+          duration: 1.2,
+          stagger: 0.12,
+          delay: 0.15,
+          ease: "expo.out",
+          scrollTrigger: { trigger: ".awards", start: "top 85%" },
         });
         gsap.from(".certs li", {
           opacity: 0,
@@ -103,19 +114,26 @@ export function Evidence() {
       </header>
 
       <h3 className="evidence__sub mono mono--lg" style={{ marginTop: "clamp(2rem, 5vh, 3.5rem)" }}>Results</h3>
-      <div className="tallies">
-        {record.map((r) => (
-          <div key={r.title} className="tally">
-            <span className="tally__fig display num">{r.figure}</span>
-            <div>
-              <h4>{r.title}</h4>
-              <p>
-                {r.figure} {r.unit}. {r.detail}
+      <ul className="awards">
+        {record.map((r, i) => (
+          <li key={r.title} className={`award award--${i + 1}`}>
+            <div className="award__face">
+              <p className="award__top mono">
+                <span>{AWARD_KIND[i]}</span>
+                <span className="num">{String(i + 1).padStart(2, "0")}</span>
               </p>
+              <p className="award__fig display num">
+                {r.figure}
+                <span className="award__unit mono mono--lg">{r.unit}</span>
+              </p>
+              <div>
+                <h4>{r.title}</h4>
+                <p>{r.detail}</p>
+              </div>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
 
       <h3 className="evidence__sub mono mono--lg">Certifications</h3>
       <ul className="certs">

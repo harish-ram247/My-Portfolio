@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { MOTION_OK, gsap, useGSAP } from "@/lib/gsap";
+import { MOTION_OK, ScrollTrigger, gsap, useGSAP } from "@/lib/gsap";
 import { sideProjects } from "@/content/site";
 import { Arrow } from "./Arrow";
+import { ProjectArt } from "./ProjectArt";
 
 const TONES = ["ink", "paper", "yellow"] as const;
 
@@ -28,6 +29,10 @@ export function AlsoOnFile() {
         });
 
         const cards = gsap.utils.toArray<HTMLElement>(".stack-card");
+        // Run each card's illustration only while the card is on screen.
+        cards.forEach((card) =>
+          ScrollTrigger.create({ trigger: card, start: "top bottom", end: "bottom top", toggleClass: "is-live" }),
+        );
         cards.forEach((card, i) => {
           const next = cards[i + 1];
           if (!next) return;
@@ -37,16 +42,16 @@ export function AlsoOnFile() {
             card.querySelector(".stack-card__inner"),
             { scale: 1, filter: "brightness(1)" },
             {
-            scale: 1 - 0.045 * depth,
-            filter: "brightness(0.55)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: next,
-              start: "top bottom",
-              end: "top 22%",
-              scrub: true,
-              invalidateOnRefresh: true,
-            },
+              scale: 1 - 0.045 * depth,
+              filter: "brightness(0.55)",
+              ease: "none",
+              scrollTrigger: {
+                trigger: next,
+                start: "top bottom",
+                end: "top 22%",
+                scrub: true,
+                invalidateOnRefresh: true,
+              },
             },
           );
         });
@@ -106,6 +111,9 @@ export function AlsoOnFile() {
               </div>
 
               <div className="stack-card__aside" aria-hidden="true">
+                <div className="stack-card__art">
+                  <ProjectArt id={p.id} />
+                </div>
                 <span className="stack-card__num display num">{String(i + 1).padStart(2, "0")}</span>
               </div>
             </div>

@@ -1372,36 +1372,6 @@ html.anim [data-intro] {
   border-bottom: 1px solid var(--line-strong);
   font-weight: 600;
 }
-.tallies {
-  margin: 0;
-}
-.tally {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  align-items: baseline;
-  gap: clamp(1rem, 3vw, 3rem);
-  padding-block: clamp(0.9rem, 2.4vh, 1.5rem);
-  border-bottom: 1px solid var(--line);
-}
-.tally__fig {
-  font-size: clamp(3.4rem, 9vw, 9.5rem);
-  font-stretch: 74%;
-  line-height: 0.82;
-  white-space: nowrap;
-}
-.tally h4 {
-  margin: 0 0 0.3rem;
-  font-family: var(--font-display);
-  font-stretch: 90%;
-  font-weight: 700;
-  font-size: clamp(1.25rem, 2.1vw, 1.9rem);
-  letter-spacing: -0.015em;
-  line-height: 1.1;
-}
-.tally p {
-  margin: 0;
-  color: var(--fg-2);
-}
 .certs {
   list-style: none;
   margin: 1.5rem 0 0;
@@ -1429,12 +1399,6 @@ html.anim [data-intro] {
 }
 .certs span {
   color: var(--color-yellow);
-}
-@media (max-width: 899px) {
-  .tally {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-  }
 }
 
 /* one last thing */
@@ -1678,31 +1642,235 @@ html.anim [data-intro] {
   outline-color: var(--card-fg);
 }
 .stack-card__aside {
-  position: relative;
   display: grid;
-  align-content: end;
-  justify-items: end;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 1rem;
   border-left: 1px solid var(--card-line);
   padding-left: clamp(1rem, 3vw, 3rem);
-  min-height: 9rem;
+  min-width: 0;
+}
+.stack-card__art {
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  max-width: 30rem;
 }
 .stack-card__num {
-  font-size: clamp(7rem, 21vw, 22rem);
+  justify-self: end;
+  font-size: clamp(4.5rem, 8vw, 8.5rem);
   line-height: 0.74;
   color: transparent;
   -webkit-text-stroke: 1.5px var(--card-line);
   font-stretch: 80%;
   user-select: none;
 }
-.stack-card__note {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  max-width: 18ch;
-  text-align: right;
-  color: var(--card-3);
+
+/* ---------- project art ---------- */
+
+.art {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  color: var(--card-fg);
 }
+.art text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-stretch: 88%;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: currentColor;
+}
+.art .a-dim {
+  fill: var(--card-3);
+}
+.art .a-ln {
+  stroke: currentColor;
+  stroke-width: 1;
+}
+.art .a-faint {
+  stroke: var(--card-line);
+}
+.art .a-acc {
+  stroke: var(--card-acc);
+}
+.art .a-accf {
+  fill: var(--card-acc);
+}
+.art .a-card {
+  fill: var(--card-bg);
+}
+.art .a-fill {
+  fill: currentColor;
+}
+.art .a-fill-faint {
+  fill: var(--card-line);
+}
+
+/* Animations run only while the card is on screen (.is-live). */
+.art * {
+  animation-play-state: paused;
+}
+.stack-card.is-live .art * {
+  animation-play-state: running;
+}
+
+.a-stream {
+  animation: a-stream 7s linear infinite;
+}
+@keyframes a-stream {
+  to {
+    transform: translateX(-288px);
+  }
+}
+.a-blink {
+  animation: a-blink 1.6s steps(2, jump-none) infinite;
+}
+@keyframes a-blink {
+  50% {
+    opacity: 0.2;
+  }
+}
+.a-flow {
+  stroke-width: 1.5;
+  stroke-dasharray: 3 6;
+  animation: a-flow 1.1s linear infinite;
+}
+@keyframes a-flow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+.a-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: a-pulse 1.8s ease-out infinite;
+}
+@keyframes a-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.7);
+    opacity: 0.45;
+  }
+}
+
+.a-stem {
+  stroke-dasharray: 1;
+  animation: a-stem 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes a-stem {
+  0% {
+    stroke-dashoffset: 1;
+  }
+  25%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+.a-leaf {
+  transform-box: view-box;
+  animation: a-leaf 6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+@keyframes a-leaf {
+  0%,
+  8% {
+    transform: scale(0);
+  }
+  26%,
+  100% {
+    transform: scale(1);
+  }
+}
+.a-plant {
+  animation: a-plant 6s ease-in infinite;
+}
+@keyframes a-plant {
+  0%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.a-row {
+  fill: var(--card-acc);
+  fill-opacity: 0.14;
+  stroke-width: 1;
+  animation: a-row 6s infinite;
+}
+@keyframes a-row {
+  0%,
+  22% {
+    transform: translateY(0);
+  }
+  25%,
+  47% {
+    transform: translateY(28px);
+  }
+  50%,
+  72% {
+    transform: translateY(56px);
+  }
+  75%,
+  97% {
+    transform: translateY(84px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.a-ring {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 32;
+  stroke-linecap: round;
+  animation: a-ring 5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes a-ring {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  40%,
+  100% {
+    stroke-dashoffset: 32;
+  }
+}
+.a-bar {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: a-bar 5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes a-bar {
+  0% {
+    transform: scaleY(0.08);
+  }
+  30%,
+  100% {
+    transform: scaleY(1);
+  }
+}
+.a-tx-row {
+  animation: a-tx-row 5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes a-tx-row {
+  0%,
+  10% {
+    transform: translateX(26px);
+    opacity: 0;
+  }
+  30%,
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 @media (max-width: 899px) {
   .stack-card {
     top: calc(var(--nav-h) + 0.6rem + var(--i) * 0.6rem);
@@ -1920,4 +2088,135 @@ html.still .marquee {
   color: #cfff04;
   --stroke: #cfff04;
   text-shadow: 0 0 22px rgb(207 255 4 / 0.55), 0 0 70px rgb(207 255 4 / 0.3);
+}
+
+/* ---------- results: floating bento cards ---------- */
+
+.awards {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: minmax(13rem, auto);
+  gap: clamp(0.75rem, 1.6vw, 1.25rem);
+}
+.award--1 {
+  grid-column: span 7;
+  grid-row: span 2;
+  --glow: var(--color-red);
+  --float-d: 6.5s;
+  --float-delay: 0s;
+}
+.award--2 {
+  grid-column: span 5;
+  --glow: #cfff04;
+  --float-d: 5.6s;
+  --float-delay: -1.8s;
+}
+.award--3 {
+  grid-column: span 5;
+  --glow: var(--color-blue);
+  --float-d: 6s;
+  --float-delay: -3.4s;
+}
+.award__face {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1.25rem;
+  padding: clamp(1.2rem, 2.4vw, 2rem);
+  border-radius: 20px;
+  background: var(--color-ink);
+  color: var(--color-ivory);
+  border: 1px solid rgb(239 232 216 / 0.14);
+  box-shadow: 0 18px 34px -18px rgb(40 32 0 / 0.55), 0 4px 10px -4px rgb(40 32 0 / 0.25);
+  transition:
+    border-color 0.35s var(--ease-out-expo),
+    box-shadow 0.45s var(--ease-out-expo),
+    translate 0.45s var(--ease-out-expo);
+}
+/* Gentle float: each card bobs on its own period so the row never moves in step. */
+html.anim .award__face {
+  animation: award-float var(--float-d) ease-in-out var(--float-delay) infinite;
+}
+@keyframes award-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(-0.25deg);
+  }
+}
+.award__face:hover {
+  border-color: var(--glow);
+  translate: 0 -4px;
+  box-shadow:
+    0 0 0 1px var(--glow),
+    0 0 22px color-mix(in srgb, var(--glow) 55%, transparent),
+    0 0 60px -6px color-mix(in srgb, var(--glow) 45%, transparent),
+    0 26px 40px -18px rgb(40 32 0 / 0.6);
+}
+.award__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgb(239 232 216 / 0.16);
+  color: #8f887a;
+}
+.award__fig {
+  align-self: center;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.15em 0.35em;
+  margin: 0;
+  font-size: clamp(3.6rem, 8vw, 7.5rem);
+  font-stretch: 74%;
+  line-height: 0.82;
+  color: var(--color-ivory);
+  transition: color 0.35s;
+}
+.award--1 .award__fig {
+  font-size: clamp(5rem, 15vw, 15rem);
+}
+.award__face:hover .award__fig {
+  color: var(--glow);
+}
+.award__unit {
+  font-size: 0.8rem;
+  line-height: 1;
+  color: #bdb5a4;
+}
+.award h4 {
+  margin: 0 0 0.3rem;
+  font-family: var(--font-display);
+  font-stretch: 90%;
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1.9vw, 1.7rem);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+.award p:last-child {
+  margin: 0;
+  color: #bdb5a4;
+}
+@media (max-width: 899px) {
+  .awards {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+  .award--1,
+  .award--2,
+  .award--3 {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .award__face {
+    min-height: 14rem;
+  }
 }
