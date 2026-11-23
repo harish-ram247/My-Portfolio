@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { MOTION_OK, gsap, useGSAP } from "@/lib/gsap";
-import { certifications, contact, experience, person, record, skills } from "@/content/site";
+import { certifications, contact, experience, leadership, person, record, skills } from "@/content/site";
 import { Arrow } from "./Arrow";
 import { PrizeSlot } from "./PrizeSlot";
 
@@ -109,6 +109,13 @@ export function Evidence() {
           ease: "expo.out",
           scrollTrigger: { trigger: ".certs", start: "top 88%" },
         });
+        gsap.from(".lead li", {
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          ease: "expo.out",
+          scrollTrigger: { trigger: ".lead", start: "top 88%" },
+        });
       });
     },
     { scope: root },
@@ -165,6 +172,17 @@ export function Evidence() {
               <strong>{c.name}</strong>
             )}
             <span className="mono">{c.by}</span>
+          </li>
+        ))}
+      </ul>
+
+      <h3 className="evidence__sub mono mono--lg">Community &amp; Leadership</h3>
+      <ul className="lead">
+        {leadership.map((l) => (
+          <li key={l.role}>
+            <span className="lead__org mono">{l.org}</span>
+            <strong>{l.role}</strong>
+            <p>{l.detail}</p>
           </li>
         ))}
       </ul>

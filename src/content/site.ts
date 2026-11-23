@@ -246,6 +246,15 @@ export const certifications = [
   { name: "Claude 101", by: "Anthropic", url: null },
 ] as const;
 
+// Supplied by Harish (23 Nov 2026).
+export const leadership = [
+  {
+    role: "PR & Event Management",
+    org: "Hackerz",
+    detail: "Handled promotion and on-ground coordination for the department's annual technical symposium.",
+  },
+] as const;
+
 export const nav = [
   { href: "#top", label: "Home" },
   { href: "#subject", label: "About" },

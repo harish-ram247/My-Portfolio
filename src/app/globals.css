@@ -1403,6 +1403,41 @@ html.anim [data-intro] {
 .certs span {
   color: var(--color-yellow);
 }
+/* Community & Leadership: ink tiles like the certifications, wider for a sentence. */
+.lead {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 26rem), 1fr));
+  gap: 0.6rem;
+}
+.lead li {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+  padding: 1.2rem 1.3rem 1.4rem;
+  background: var(--color-ink);
+  color: var(--color-ivory);
+}
+.lead__org {
+  color: var(--color-yellow);
+}
+.lead strong {
+  font-family: var(--font-display);
+  font-stretch: 88%;
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.lead p {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--color-ivory-2);
+  line-height: 1.55;
+}
+
 /* Credential links: the whole tile is clickable; looks unchanged at rest. */
 .certs li:has(.certs__link) {
   position: relative;
