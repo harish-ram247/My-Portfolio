@@ -222,9 +222,10 @@ export const certifications = [
 ] as const;
 
 export const nav = [
-  { href: "#subject", label: "Subject" },
-  { href: "#case-files", label: "Case files" },
-  { href: "#toolkit", label: "Toolkit" },
+  { href: "#top", label: "Home" },
+  { href: "#subject", label: "About" },
+  { href: "#case-files", label: "Projects" },
   { href: "#experience", label: "Experience" },
-  { href: "#evidence", label: "Evidence" },
+  { href: "#evidence", label: "Certificates" },
+  { href: "#collaborate", label: "Contact" },
 ] as const;

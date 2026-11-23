@@ -76,11 +76,6 @@ export function Nav() {
                 </a>
               </li>
             ))}
-            <li>
-              <a href="#collaborate" className="nav__link" style={{ color: "var(--color-yellow)" }}>
-                Hire me
-              </a>
-            </li>
           </ul>
         </nav>
 
@@ -129,7 +124,7 @@ export function Nav() {
             transition={{ duration: reduce ? 0 : 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <ul>
-              {[...nav, { href: "#collaborate", label: "Hire me" }].map((n, i) => (
+              {nav.map((n, i) => (
                 <motion.li
                   key={n.href}
                   initial={{ opacity: 0, y: 24 }}
