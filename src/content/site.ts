@@ -131,6 +131,8 @@ export const sideProjects: SideProject[] = [
     kind: "Built at Chennai Institute of Technology, Centre of Excellence",
     body: "A Node.js monitoring solution using Prometheus, Grafana and prom-client to track application performance and visualize system health on Kubernetes infrastructure.",
     stack: ["Node.js", "prom-client", "Prometheus", "Grafana", "Kubernetes"],
+    // Team repository, supplied by Harish (23 Nov 2026).
+    repo: { label: "Arjuna247/counter_metrics", href: "https://github.com/Arjuna247/counter_metrics" },
   },
   {
     id: "urban-farm",
