@@ -83,6 +83,11 @@ export const caseStudies: CaseStudy[] = [
       "IPFS evidence storage",
     ],
     stack: ["React.js", "Node.js", "Express.js", "MongoDB", "Polygon", "W3C DID", "IPFS"],
+    // Team repository, supplied by Harish (23 Nov 2026).
+    repo: {
+      label: "Hariharan-081206/securesphere-connect",
+      href: "https://github.com/Hariharan-081206/securesphere-connect",
+    },
     accent: "red",
   },
   {
