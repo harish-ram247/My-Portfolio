@@ -106,6 +106,11 @@ export const caseStudies: CaseStudy[] = [
       "Cloud dashboard integration",
     ],
     stack: ["ESP32", "Python", "MPU6050", "FedAvg", "Blockchain", "HTTP"],
+    // Team repository, supplied by Harish (23 Nov 2026).
+    repo: {
+      label: "Arjuna247/iot-predictive-maintenance",
+      href: "https://github.com/Arjuna247/iot-predictive-maintenance",
+    },
     accent: "blue",
   },
 ];
