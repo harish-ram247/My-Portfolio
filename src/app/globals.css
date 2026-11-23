@@ -1403,6 +1403,24 @@ html.anim [data-intro] {
 .certs span {
   color: var(--color-yellow);
 }
+/* Credential links: the whole tile is clickable; looks unchanged at rest. */
+.certs li:has(.certs__link) {
+  position: relative;
+}
+.certs__link {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+.certs__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.certs li:has(.certs__link:focus-visible) {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
 
 /* one last thing */
 .last {

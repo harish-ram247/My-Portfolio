@@ -212,13 +212,38 @@ export const record = [
 ] as const;
 
 export const certifications = [
-  { name: "AWS Certified Cloud Practitioner (CLF-C02)", by: "AWS" },
-  { name: "AWS Certified AI Practitioner (AIF-C01)", by: "AWS" },
-  { name: "Artificial Intelligence Fundamentals", by: "IBM SkillsBuild" },
-  { name: "Introduction to Modern AI", by: "Cisco" },
-  { name: "Introduction to IoT", by: "Cisco" },
-  { name: "MongoDB Basics for Students", by: "MongoDB" },
-  { name: "Claude 101", by: "Anthropic" },
+  // url: public Credly credential, supplied by Harish (23 Nov 2026).
+  {
+    name: "AWS Certified Cloud Practitioner (CLF-C02)",
+    by: "AWS",
+    url: "https://www.credly.com/badges/7e601d3f-2d3c-4974-8ea4-25bb9925c824/public_url",
+  },
+  {
+    name: "AWS Certified AI Practitioner (AIF-C01)",
+    by: "AWS",
+    url: "https://www.credly.com/badges/ce503447-f606-4f25-88cb-5431eaf1c4c2/public_url",
+  },
+  {
+    name: "Artificial Intelligence Fundamentals",
+    by: "IBM SkillsBuild",
+    url: "https://www.credly.com/badges/e1f7ab06-ded7-4511-b4a1-026dc7f79a5d/public_url",
+  },
+  {
+    name: "Introduction to Modern AI",
+    by: "Cisco",
+    url: "https://www.credly.com/badges/3f161d91-4ed2-438e-a618-c8e262698228/public_url",
+  },
+  {
+    name: "Introduction to IoT",
+    by: "Cisco",
+    url: "https://www.credly.com/badges/0ee655e8-a36f-47bf-8de3-61a49ed6d750/public_url",
+  },
+  {
+    name: "MongoDB Basics for Students",
+    by: "MongoDB",
+    url: "https://www.credly.com/badges/826b10ad-4ba5-405e-8c11-03af4a057076/public_url",
+  },
+  { name: "Claude 101", by: "Anthropic", url: null },
 ] as const;
 
 export const nav = [

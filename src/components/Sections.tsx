@@ -155,7 +155,15 @@ export function Evidence() {
       <ul className="certs">
         {certifications.map((c) => (
           <li key={c.name}>
-            <strong>{c.name}</strong>
+            {c.url ? (
+              // The link's ::after covers the whole card, so the card is the click target.
+              <a className="certs__link" href={c.url} target="_blank" rel="noopener noreferrer">
+                <strong>{c.name}</strong>
+                <span className="sr-only"> — view credential on Credly (opens in a new tab)</span>
+              </a>
+            ) : (
+              <strong>{c.name}</strong>
+            )}
             <span className="mono">{c.by}</span>
           </li>
         ))}
